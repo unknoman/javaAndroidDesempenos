@@ -1,0 +1,160 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFF00"
+    tools:context=".Factura" >
+
+    <TextView
+        android:id="@+id/descuento1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tv"
+        android:layout_toRightOf="@+id/tv" />
+
+    <TextView
+        android:id="@+id/nom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/descuento1"
+        android:layout_marginLeft="65dp"
+        android:layout_toRightOf="@+id/descuento1"
+        android:text="Nombre:" />
+
+    <TextView
+        android:id="@+id/nombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/nom"
+        android:layout_alignBottom="@+id/nom"
+        android:layout_marginLeft="14dp"
+        android:layout_toRightOf="@+id/nom"
+        android:text="0"
+        android:textColor="#00ff00" />
+
+    <TextView
+        android:id="@+id/cantidad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/nom"
+        android:layout_below="@+id/nom"
+        android:layout_marginTop="22dp"
+        android:text="Cantidad:" />
+
+    <TextView
+        android:id="@+id/cantidad1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/cantidad"
+        android:layout_alignBottom="@+id/cantidad"
+        android:layout_alignLeft="@+id/nombre"
+        android:text="0"
+        android:textColor="#00ff00" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/cantidad"
+        android:layout_below="@+id/cantidad"
+        android:layout_marginTop="20dp"
+        android:text="Precio:" />
+
+    <TextView
+        android:id="@+id/precio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView1"
+        android:layout_alignBottom="@+id/textView1"
+        android:layout_alignLeft="@+id/cantidad1"
+        android:text="0"
+        android:textColor="#00ff00" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="18dp"
+        android:text="Desc/Inc:" />
+
+    <TextView
+        android:id="@+id/descuento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView2"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/precio"
+        android:text="0"
+        android:textColor="#00ff00" />
+
+    <Button
+        android:id="@+id/btn1"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="32dp"
+        android:onClick="aceptar"
+        android:text="Aceptar" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_below="@+id/textView2"
+        android:layout_marginTop="17dp"
+        android:text="Metodo de pago:" />
+
+    <TextView
+        android:id="@+id/metodo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView3"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/textView3"
+        android:text="0"
+        android:textColor="#00ff00" />
+
+    <TextView
+        android:id="@+id/textView222"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_centerVertical="true"
+        android:text="Envio:" />
+
+    <TextView
+        android:id="@+id/envio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView222"
+        android:layout_alignBottom="@+id/textView222"
+        android:layout_toRightOf="@+id/nom"
+        android:text="0"
+        android:textColor="#00ff00" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView222"
+        android:layout_below="@+id/textView222"
+        android:layout_marginTop="27dp"
+        android:text="Total" />
+
+    <TextView
+        android:id="@+id/total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView4"
+        android:layout_alignBottom="@+id/textView4"
+        android:layout_alignLeft="@+id/descuento"
+        android:gravity="center"
+        android:text="0"
+        android:textColor="#FF0000" />
+
+</RelativeLayout>

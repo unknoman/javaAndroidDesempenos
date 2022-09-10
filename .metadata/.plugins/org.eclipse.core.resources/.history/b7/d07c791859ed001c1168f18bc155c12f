@@ -1,0 +1,160 @@
+package com.example.parcial2h;
+
+import com.example.sqlproyecto;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.view.Menu;
+import android.view.View;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.TextView;
+import android.widget.Toast;
+
+public class MainActivity extends Activity {
+
+	EditText et1, et2, et3, et4;
+	TextView tv1;
+	CheckBox cb1;
+	RadioButton rd1, rd2;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        et1 = (EditText) findViewById(R.id.et1);
+        et2 = (EditText) findViewById(R.id.et2);
+        et3 = (EditText) findViewById(R.id.et3);
+        et4 = (EditText) findViewById(R.id.et4);
+        tv1 = (TextView) findViewById(R.id.tv1);
+        cb1 = (CheckBox) findViewById(R.id.cb1);
+        rd1 = (RadioButton) findViewById(R.id.rd1);
+        rd2 = (RadioButton) findViewById(R.id.rd2);
+        
+    }
+
+    public boolean validacion(){
+    	String codigo = et1.getText().toString();
+    	String nombre = et2.getText().toString();
+    	String genero = et3.getText().toString();
+    	String precio = et4.getText().toString();
+    	if(codigo.equals("") || nombre.equals("") || genero.equals("") || precio.equals("")){
+    		return false;
+    	} else
+    	{
+    		return true;
+    	}
+    }
+    public void consultar(View view){
+    	String nombre = et2.getText().toString();
+    	if(nombre.equals("")){
+    		Toast.makeText(this, "Introduce un nombre", Toast.LENGTH_SHORT).show();
+    	} else {
+        	BaseDatos bd = new BaseDatos(this, "productos1", null, 1);
+        	SQLiteDatabase bds = bd.getWritableDatabase();
+        	Cursor fila=bds.rawQuery("select codigo,genero from productos where dni="+nombre+"",null);
+        	
+        	  if (fila.moveToFirst())
+        	 {
+        	 et1.setText(fila.getString(0));
+        	 et3.setText(fila.getString(1));
+        	 }  else
+         	{
+         		Toast.makeText(this, "No existe una persona con dicho dni", Toast.LENGTH_SHORT).show();
+         		bd.close(); 
+         	}
+        	 
+     		bd.close(); 
+    	}
+
+    }
+    
+    /*
+     public void consulta(View xd){
+    	AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "administracion", null, 1);
+    	SQLiteDatabase bd = admin.getWritableDatabase(); // SQLiteDatabase bd1=admin1.getWritableDatabase();
+    	String dni = et1.getText().toString(); // String dni1=et1.getText().toString();
+    	Cursor fila=bd.rawQuery("select nombre,colegio from votantes where dni="+dni+"",null);  // Cursor fila1=bd1.rawQuery("select nombre,colegio from votantes where dni="+dni1+"",null);
+    	if(fila.moveToFirst()) // if (fila1.moveToFirst())
+    	{
+   		 et2.setText(fila.getString(0));
+   		 et3.setText(fila.getString(1));
+    	} else
+    	{
+    		Toast.makeText(this, "No existe una persona con dicho dni", Toast.LENGTH_SHORT).show();
+    		bd.close(); 
+    	}
+    }
+     */
+    public void altas(View view)
+    {
+    	String codigo = et1.getText().toString();
+    	String nombre = et2.getText().toString();
+    	String genero = et3.getText().toString();
+    	String precio = et4.getText().toString();
+     	if(validacion() == false){
+    		Toast.makeText(this, "Tienes que ingresar todos los campos antes de continuar", Toast.LENGTH_SHORT).show();
+    	} else {
+
+    		BaseDatos bd = new BaseDatos(this, "productos1", null, 1);
+    		SQLiteDatabase bdw = bd.getWritableDatabase();
+    		ContentValues registrar = new ContentValues();
+    		registrar.put("codigo", codigo);
+    		registrar.put("nombre", nombre);
+    		registrar.put("genero", genero);
+    		registrar.put("precio", precio);
+    		bdw.insert("productos", null, registrar);
+    		bd.close();
+    		Toast.makeText(this, "Datos cargados correctamente", Toast.LENGTH_SHORT).show();
+    		et1.setText("");
+    		et2.setText("");
+    		et3.setText("");
+    		et4.setText("");
+    	}
+    }
+    public void importe(View view){
+    	String precio = et4.getText().toString();
+    	if(validacion() == false){
+    		Toast.makeText(this, "Tienes que ingresar todos los campos antes de continuar", Toast.LENGTH_SHORT).show();
+    	} else 
+    	{
+    		int precio1 = Integer.parseInt(precio);
+    		float resultado;
+    		//--- radio desactivado
+    		if(rd1.isChecked() && !cb1.isChecked()){
+    			float descuento = (float) (precio1 * 0.10);
+    			resultado = (float) (precio1 - descuento);
+    			tv1.setText(String.valueOf(resultado));
+    		} else
+    			if(rd2.isChecked() && !cb1.isChecked())
+    		{
+    			resultado = (float) (precio1 * 1.20);
+    			tv1.setText(String.valueOf(resultado));
+    		} else if(rd1.isChecked() && cb1.isChecked())
+    		{
+    			float descuento = (float) (precio1 * 0.10);
+    			resultado = (float) (precio1 - descuento);
+    			tv1.setText(String.valueOf(resultado + 100));
+    		} else {
+    			resultado = (float) (precio1 * 1.20);
+    			tv1.setText(String.valueOf(resultado + 100));
+    		}
+    		//-----------radio activado
+    	}
+    
+    }
+
+
+    
+    
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.activity_main, menu);
+        return true;
+    }
+    
+}
